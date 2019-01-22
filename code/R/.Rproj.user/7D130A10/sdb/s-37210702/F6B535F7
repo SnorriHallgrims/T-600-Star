@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\nlibrary('ggplot2')\nlibrary('plyr')\nlibrary('reshape2')\n\n# lesa inn gogn \nmyfilter <- function(allreads) {\n  # filtera ut leleg read\n  subset(allreads, type == 'noSuppl' & supplementary==0  & mapQual>50 )\n}\n\ndat.ins <- myfilter(read.csv('../../data/summaries/gpv213sp0.05.minimap.mapping.readsummary',sep='\\t',header = T))\ndat.del <- myfilter(read.csv('../../data/summaries/gpv213sp2.00.minimap.mapping.readsummary',sep='\\t',header = T))\ndat.unb <- myfilter(read.csv('../../data/summaries/gpv213sp0.50.minimap.mapping.readsummary',sep='\\t',header = T))\ndat.ins$sp=0.05\ndat.del$sp=2.00\ndat.unb$sp=0.50\ndat <- rbind(dat.ins,dat.del,dat.unb)\n\n#plotta \nggplot(dat, aes(x=seqLen,y=alnLen))+geom_point(aes(color=mapQual))+geom_abline(slope = 1,color='red')+facet_wrap(~sp)\np <- ggplot(dat, aes(x=nDel/alnLen,y=nIns/alnLen))+geom_point()+geom_abline(slope = 1,color='red')+coord_fixed(ratio=1)+facet_wrap(~sp)\nprint(p)\nq=intersect(dat.ins$qName,dat.del$qName)[1]\np + geom_point(data=subset(dat, qName==q),color='red')",
+    "created" : 1548164779614.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3271402250",
+    "id" : "F6B535F7",
+    "lastKnownWriteTime" : 1548164839,
+    "last_content_update" : 1548164839677,
+    "path" : "~/GitHub/T-600-Star/code/R/plot.R",
+    "project_path" : "plot.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

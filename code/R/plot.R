@@ -9,9 +9,9 @@ myfilter <- function(allreads) {
   subset(allreads, type == 'noSuppl' & supplementary==0  & mapQual>50 )
 }
 
-dat.ins <- myfilter(read.csv('data/summaries/gpv213sp0.05.minimap.mapping.readsummary',sep='\t',header = T))
-dat.del <- myfilter(read.csv('data/summaries/gpv213sp2.00.minimap.mapping.readsummary',sep='\t',header = T))
-dat.unb <- myfilter(read.csv('data/summaries/gpv213sp0.50.minimap.mapping.readsummary',sep='\t',header = T))
+dat.ins <- myfilter(read.csv('../../data/summaries/gpv213sp0.05.minimap.mapping.readsummary',sep='\t',header = T))
+dat.del <- myfilter(read.csv('../../data/summaries/gpv213sp2.00.minimap.mapping.readsummary',sep='\t',header = T))
+dat.unb <- myfilter(read.csv('../../data/summaries/gpv213sp0.50.minimap.mapping.readsummary',sep='\t',header = T))
 dat.ins$sp=0.05
 dat.del$sp=2.00
 dat.unb$sp=0.50
