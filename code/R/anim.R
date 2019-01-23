@@ -3,9 +3,9 @@ library('ggplot2')
 library('plyr')
 library('reshape2')
 library('gganimate')
-library('colorspace')
+library('extrafont')
 
-# lesa inn gogn 
+# lesa inn gogn ------------------------------------------------------------------------------------------------
 myfilter <- function(allreads) {
   # filtera ut leleg read
   subset(allreads, type == 'noSuppl' & supplementary==0  & mapQual>50 )
@@ -34,40 +34,35 @@ dat.i9$sp=2.00
 dat <- rbind(dat.i1,dat.i2,dat.i3,dat.i4,dat.i5,dat.i6,dat.i7,dat.i8,dat.i9)
 
 
-# Plot --------------------------------------------------------------------
-
-#cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-
-#plotta 
-#ggplot(dat, aes(x=seqLen,y=alnLen))+geom_point(aes(color=mapQual))+geom_abline(slope = 1)+facet_wrap(~sp)
-p <- ggplot(dat, aes(x=nDel/alnLen,y=nIns/alnLen))+geom_abline(slope = 1,color='black')+coord_fixed(ratio=1)#+facet_wrap(~sp)
-#print(p)
-
+q1=intersect(dat.i1$qName,dat.i9$qName)[rand[1]]
+q2=intersect(dat.i1$qName,dat.i9$qName)[rand[2]]
+q3=intersect(dat.i1$qName,dat.i9$qName)[rand[3]]
+q4=intersect(dat.i1$qName,dat.i9$qName)[rand[4]]
+q5=intersect(dat.i1$qName,dat.i9$qName)[rand[5]]
 
 rand=sample.int(3695,5)
-st=c(0.05,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00)
+#st=c(0.05,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00)
 
-q1=intersect(dat.ins$qName,dat.del$qName)[rand[1]]
-q2=intersect(dat.ins$qName,dat.del$qName)[rand[2]]
-q3=intersect(dat.ins$qName,dat.del$qName)[rand[3]]
-q4=intersect(dat.ins$qName,dat.del$qName)[rand[4]]
-q5=intersect(dat.ins$qName,dat.del$qName)[rand[5]]
+# Plot ------------------------------------------------------------------------------------------------------
 
 
+p <- ggplot(dat, aes(x=nDel/alnLen,y=nIns/alnLen))+geom_abline(slope = 1,color='black')+coord_fixed(ratio=1)
+print(p)
 
-p + geom_point(data=subset(dat, qName==q),colour='deepskyblue',size=3)+
+
+p + geom_point(data=subset(dat, qName==q1),colour='deepskyblue',size=3)+
   geom_point(data=subset(dat, qName==q2),colour='mediumorchid',size=3)+
   geom_point(data=subset(dat, qName==q3),colour='steelblue',size=3)+
   geom_point(data=subset(dat, qName==q4),colour='violetred',size=3)+
   geom_point(data=subset(dat, qName==q5),colour='magenta',size=3)+
   labs(title='sp: {closest_state}')+
   theme_minimal()+
-  diverge_hcl(5)+
+  theme(text = element_text(family = "Cambria"))+
   transition_states(sp,transition_length = 2.5,state_length = 1) +
   ease_aes('cubic-in-out')
-  #enter_fade()+
-  #exit_shrink()
+  
 
 
 #setwd('C:/Cadence/SPB_Data/T-600-Star/code/R')
-
+#enter_fade()+
+#exit_shrink()
