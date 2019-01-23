@@ -33,6 +33,7 @@ dat.i9$sp=2.00
 
 dat <- rbind(dat.i1,dat.i2,dat.i3,dat.i4,dat.i5,dat.i6,dat.i7,dat.i8,dat.i9)
 
+rand=sample.int(3695,5)
 
 q1=intersect(dat.i1$qName,dat.i9$qName)[rand[1]]
 q2=intersect(dat.i1$qName,dat.i9$qName)[rand[2]]
@@ -40,7 +41,6 @@ q3=intersect(dat.i1$qName,dat.i9$qName)[rand[3]]
 q4=intersect(dat.i1$qName,dat.i9$qName)[rand[4]]
 q5=intersect(dat.i1$qName,dat.i9$qName)[rand[5]]
 
-rand=sample.int(3695,5)
 #st=c(0.05,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00)
 
 # Plot ------------------------------------------------------------------------------------------------------
