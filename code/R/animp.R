@@ -1,4 +1,10 @@
 
+library('ggplot2')
+library('plyr')
+library('reshape2')
+library('gganimate')
+library('extrafont')
+
 r=c(2619, 3244, 3138, 1358, 1587)
 
 qq1=intersect(dat.i1$qName,dat.i9$qName)[r[1]]
