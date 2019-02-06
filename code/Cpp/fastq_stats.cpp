@@ -1,4 +1,4 @@
-#include <seqan/arg_parse.h>
+#include "seqan/arg_parse.h"
 #include "include/read.h"
 #include "include/fqreads.h"
 #include "include/csv.h"
