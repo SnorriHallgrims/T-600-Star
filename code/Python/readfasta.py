@@ -1,7 +1,7 @@
 from Bio import SeqIO
 import os.path
 
-def readfasta():
+def fread():
 
     sp=['0.05','0.25','0.50','0.75','1.00','1.25','1.50','1.75','2.00']
     seqdict={}
@@ -19,6 +19,7 @@ def readfasta():
         fasta_seq = SeqIO.parse(filepath,'fasta')
 
         for r in fasta_seq:
-            seqdict[r.id][s]=r.seq
+            seqdict[r.id][s]=str(r.seq)
 
     return seqdict
+
