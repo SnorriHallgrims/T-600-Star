@@ -43,3 +43,15 @@ for (val1 in i1)
     listN=append(listN,setR)
   }
 }
+
+agg <- aggregate(mdata,by=list(mdata$sp),mean)
+agg <- agg[,colSums(is.na(agg))<nrow(agg)]
+colnames(agg)[which(names(agg) == "Group.1")] <- "sp"
+Dp=agg['nDel']/agg['alnLen']
+Ip=agg['nIns']/agg['alnLen']
+names(Dp) <- 'D/len'
+names(Ip) <- 'I/len'
+cbind(agg,Dp,Ip)
+
+sp_n=c(0.05,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00)
+agg$sp_n=sp_n

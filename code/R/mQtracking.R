@@ -26,6 +26,6 @@ dropoutq=unique(dropoutq)
 p1 <- ggplot(mdata,aes(x=sp,y=mapQual))+
   theme_light()+
   theme(text = element_text(family = "Cambria"))+
-  geom_point(data=subset(mdata,qName %in% dropoutq[1:4]),aes(colour=qName))
+  geom_point(data=subset(mdata,qName %in% dropoutq[4]),aes(colour=qName))
 
 plot(p1)

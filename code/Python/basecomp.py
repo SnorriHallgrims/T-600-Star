@@ -40,6 +40,10 @@ def comp(ctrlstr,fstr,lstr):
                 outstr+='['+lstr[(ind1-dcount+icount):(ind2-dcount+icount)]+']'
                 icount+=int(l)
                 l=''
+            elif (c=='S'):
+                outstr+='{'+lstr[(ind1-dcount+icount):(ind2-dcount+icount)]+'}'
+                icount+=int(l)
+                l=''
             ind1=ind2
     return outstr
 
@@ -59,7 +63,8 @@ qualstrdict=qualstrread(filepath,qualstrdict,0,4)
 
 filepath=os.path.join(os.path.dirname(__file__),'../../../T-600-Star data/ru_snorri/My friend SAM/sp1.00ref2.00.sam')
 qualstrdict=qualstrread(filepath,qualstrdict,4,8)
-num='18d13ed9-c1d1-404a-bdc8-c275c7f152e0'
+#num='18d13ed9-c1d1-404a-bdc8-c275c7f152e0'
+num='bd9ad8d2-d1b5-4e15-9083-2e3b9540a8ac'
 
 basestrdict=readfasta.fread()
 
