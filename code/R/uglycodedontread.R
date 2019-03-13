@@ -55,3 +55,29 @@ cbind(agg,Dp,Ip)
 
 sp_n=c(0.05,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00)
 agg$sp_n=sp_n
+
+rawdata <- h5read('training.fast5','/read_2fcbf042-96ab-4441-8bdd-aa023c619049/')
+
+raw1 <- h5read('training.fast5','/read_2fcbf042-96ab-4441-8bdd-aa023c619049/Raw/Signal')
+raw2 <- h5read('training.fast5','/read_2faeddba-ee33-428d-9ee4-e7169e6afc93/Raw/Signal')
+raw3 <- h5read('training.fast5','/read_2f72adf8-0f49-4a63-ab69-30030c566350/Raw/Signal')
+
+x1 <- 1:length(raw1)
+x2 <- 1:length(raw2)
+x3 <- 1:length(raw3)
+
+
+raw4=trainsignals$signal[[66]]]
+x4 <- 1:length(raw4)
+qplot(x=x4,y=raw4,geom='line')
+
+
+p <- ggplot(data.frame(raw1),aes())+
+  geom_freqpoly()
+print(p)
+
+
+y=abs(fft(signal))
+x <- 1:length(y)
+
+qplot(x,y,geom='line')

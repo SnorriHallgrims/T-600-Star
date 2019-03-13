@@ -1,19 +1,40 @@
 library('ggplot2')
 library('rhdf5')
 
-rawdata <- h5read('testing.fast5','/ALL/Raw/')
-
-raw1 <- h5read('training.fast5','/read_2fcbf042-96ab-4441-8bdd-aa023c619049/Raw/Signal')
-raw2 <- h5read('training.fast5','/read_2faeddba-ee33-428d-9ee4-e7169e6afc93/Raw/Signal')
-raw3 <- h5read('training.fast5','/read_2f72adf8-0f49-4a63-ab69-30030c566350/Raw/Signal')
-
-x1 <- 1:length(raw1)
-x2 <- 1:length(raw2)
-x3 <- 1:length(raw3)
-
-qplot(x=x3,y=raw3,geom='line')
+trainreads <- read.csv('trainingreads.txt',header = F)
+trainreads$V1 <- substr(trainreads$V1,6,41)
 
 
-p <- ggplot(data.frame(raw1),aes())+
-  geom_freqpoly()
-print(p)
+first=TRUE
+lentrain=c(1:length(trainreads$V1))
+for (ii in lentrain)
+{
+  rawsign <- h5read('training.fast5',paste('/read_',trainreads$V1[ii],'/Raw/Signal',sep=''))
+  rawsign=as.numeric(rawsign)
+  temp <- data.frame('qName'=trainreads$V1[ii])
+  temp$signal <- list(rawsign)
+  if(first){trainsignals=temp;first=FALSE}
+  else{trainsignals=rbind(trainsignals,temp)}
+  
+  #if (first){trainsignals <- data.frame('qName'=trainreads$V1[ii],'signal'=list(rawsign));first=FALSE}
+  #else{rbind(trainsignals,data.frame('qName'=trainreads$V1[ii],'signal'=list(rawsign)))}
+}
+
+##################################
+
+testreads <- read.csv('testingreads.txt',header = F)
+testreads$V1 <- substr(testreads$V1,6,41)
+
+
+first=TRUE
+lentest=c(1:length(testreads$V1))
+for (ii in lentest)
+{
+  rawsign <- h5read('testing.fast5',paste('/read_',testreads$V1[ii],'/Raw/Signal',sep=''))
+  rawsign=as.numeric(rawsign)
+  temp <- data.frame('qName'=testreads$V1[ii])
+  temp$signal <- list(rawsign)
+  if(first){testsignals=temp;first=FALSE}
+  else{testsignals=rbind(testsignals,temp)}
+  
+}
